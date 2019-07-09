@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 
 namespace fmMain.Classes
 {
@@ -11,8 +12,8 @@ namespace fmMain.Classes
     {
         public Top V1;
         public Top V2;
-        public int Weight = 0;
-        public Line(Top v1, Top v2, int weight)
+        public double Weight = 0;
+        public Line(Top v1, Top v2, double weight)
         {
             V1 = v1;
             V2 = v2;
@@ -20,18 +21,21 @@ namespace fmMain.Classes
             //v1.degreeT++;
             //v2.degreeT++;
         }
-        public void DrawLine(Bitmap bmp, Color clr)//нарисовать дугу
+        public void DrawLine(Bitmap bmp)//нарисовать дугу
         {
             Graphics Ln = Graphics.FromImage(bmp);
 
-            Pen pen = new Pen(clr);
-
+            Pen pen = new Pen(V1.Color);
+            //Point point = new Point(V1.X, V1.Y);
+            //pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.EndCap = LineCap.RoundAnchor;
             Ln.DrawLine(pen, V1.X, V1.Y, V2.X, V2.Y);
-
+            pen.Dispose();
             Font drawFont = new Font("Arial", 16);
-            SolidBrush drawBrush = new SolidBrush(clr);
-            PointF drawPoint = new PointF((V2.X + V1.X) / 2, (V2.Y + V1.Y) / 2);
-
+            SolidBrush drawBrush = new SolidBrush(V1.Color);
+            //PointF drawPoint = new PointF(V1.X+10, V1.Y+10);
+            //PointF drawPoint = new PointF(((V1.X + V2.X) / 2 + V1.X / 3), (V2.Y + V1.Y + 15) / 2);
+            PointF drawPoint = new PointF((V1.X + V2.X) / 2, (V1.Y + V2.Y) / 2);
             Ln.DrawString(Weight.ToString(), drawFont, drawBrush, drawPoint);
         }
 

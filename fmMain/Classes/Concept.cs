@@ -25,12 +25,12 @@ namespace fmMain.Classes
             TermList = new List<Term>();
         }
 
-        public Concept(int id, string name, List<Term> termList)
+        public Concept(int id, string name, double degree, List<Term> termList)
         {
             //TermList = new List<Term>();
             TermList = termList;
             Name = name;
-            DegreeOfBelonging = 0;
+            DegreeOfBelonging = degree;
             Id = id;
         }
 

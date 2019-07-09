@@ -15,13 +15,14 @@ namespace fmMain.Classes
         public int X { get; set; }
         public int Y { get; set; }
         public string Name { get; set; }
-
+        public Color Color { get; set; }
         public int Diameter { get { return 50; } }
 
-        public Top(int x, int y)
+        public Top(int x, int y, Color color)
         {
             X = x;
             Y = y;
+            Color = color;
         }
 
         public Top()
@@ -32,7 +33,7 @@ namespace fmMain.Classes
         public void DrawTop(string letter, Bitmap bmp)//Нарисовать круг стандартным диаметром в координатах x и y
         {
             Graphics Ver = Graphics.FromImage(bmp);
-            SolidBrush drawBrush1 = new SolidBrush(Color.Aquamarine);
+            SolidBrush drawBrush1 = new SolidBrush(Color);
 
             Ver.FillEllipse(drawBrush1, X - Diameter / 2, Y - Diameter / 2, Diameter, Diameter);
 
@@ -40,6 +41,7 @@ namespace fmMain.Classes
             SolidBrush drawBrush = new SolidBrush(Color.Black);
             PointF drawPoint = new PointF(X - 10, Y - 10);
             this.Name = letter;
+            //this.Color = color;
             Ver.DrawString(letter, drawFont, drawBrush, drawPoint);
         }
 
@@ -47,11 +49,11 @@ namespace fmMain.Classes
         {
             Graphics Ver = Graphics.FromImage(bmp);
 
-            Pen pen = new Pen(Color.Aquamarine, 3);
+            Pen pen = new Pen(Color, 3);
             Ver.DrawEllipse(pen, X - (Diameter + 7) / 2, Y - (Diameter + 7) / 2, Diameter + 7, Diameter + 7);
-            pen = new Pen(Color.Aquamarine, 2);
+            pen = new Pen(Color, 2);
             Ver.DrawEllipse(pen, X - (Diameter + 17) / 2, Y - (Diameter + 17) / 2, Diameter + 17, Diameter + 17);
-            pen = new Pen(Color.Aquamarine, 1);
+            pen = new Pen(Color, 1);
             Ver.DrawEllipse(pen, X - (Diameter + 25) / 2, Y - (Diameter + 25) / 2, Diameter + 25, Diameter + 25);
         }
 
