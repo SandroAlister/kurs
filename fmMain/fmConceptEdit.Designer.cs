@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmConceptEdit));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.seDegree = new DevExpress.XtraEditors.SpinEdit();
             this.sbOK = new DevExpress.XtraEditors.SimpleButton();
             this.sbCancel = new DevExpress.XtraEditors.SimpleButton();
             this.sbDeleteTerm = new DevExpress.XtraEditors.SimpleButton();
@@ -52,10 +54,10 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lciCancel = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciOK = new DevExpress.XtraLayout.LayoutControlItem();
-            this.seDegree = new DevExpress.XtraEditors.SpinEdit();
             this.lciDegree = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.seDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTerm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTerm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teName.Properties)).BeginInit();
@@ -69,7 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciOK)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.seDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciDegree)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +91,32 @@
             this.layoutControl1.Size = new System.Drawing.Size(408, 339);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // seDegree
+            // 
+            this.seDegree.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.seDegree.Location = new System.Drawing.Point(147, 36);
+            this.seDegree.Name = "seDegree";
+            this.seDegree.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.seDegree.Properties.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.seDegree.Properties.MaxValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.seDegree.Size = new System.Drawing.Size(249, 20);
+            this.seDegree.StyleController = this.layoutControl1;
+            this.seDegree.TabIndex = 11;
+            this.seDegree.EditValueChanged += new System.EventHandler(this.teName_EditValueChanged);
             // 
             // sbOK
             // 
@@ -380,32 +407,6 @@
             this.lciOK.TextSize = new System.Drawing.Size(0, 0);
             this.lciOK.TextVisible = false;
             // 
-            // seDegree
-            // 
-            this.seDegree.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.seDegree.Location = new System.Drawing.Point(147, 36);
-            this.seDegree.Name = "seDegree";
-            this.seDegree.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.seDegree.Properties.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.seDegree.Properties.MaxValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.seDegree.Size = new System.Drawing.Size(249, 20);
-            this.seDegree.StyleController = this.layoutControl1;
-            this.seDegree.TabIndex = 11;
-            this.seDegree.EditValueChanged += new System.EventHandler(this.teName_EditValueChanged);
-            // 
             // lciDegree
             // 
             this.lciDegree.Control = this.seDegree;
@@ -423,11 +424,13 @@
             this.CancelButton = this.sbCancel;
             this.ClientSize = new System.Drawing.Size(408, 339);
             this.Controls.Add(this.layoutControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmConceptEdit";
             this.Text = "Окно редактирования концепта";
             this.Load += new System.EventHandler(this.fmConceptEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.seDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTerm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTerm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teName.Properties)).EndInit();
@@ -441,7 +444,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciOK)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.seDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciDegree)).EndInit();
             this.ResumeLayout(false);
 

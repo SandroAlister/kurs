@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmRelativeEdit));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -258,6 +259,7 @@
             this.CancelButton = this.sbCancel;
             this.ClientSize = new System.Drawing.Size(499, 108);
             this.Controls.Add(this.layoutControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmRelativeEdit";
             this.Text = "Окно редактирования отношений между концептами";
             this.Load += new System.EventHandler(this.fmRelativeEdit_Load);

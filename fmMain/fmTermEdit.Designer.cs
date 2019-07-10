@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmTermEdit));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.seX1 = new DevExpress.XtraEditors.SpinEdit();
@@ -41,11 +42,11 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.teName = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.sbOK = new DevExpress.XtraEditors.SimpleButton();
             this.sbCancel = new DevExpress.XtraEditors.SimpleButton();
             this.lciCancel = new DevExpress.XtraLayout.LayoutControlItem();
-            this.sbOK = new DevExpress.XtraEditors.SimpleButton();
             this.lciOK = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -60,9 +61,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciOK)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -265,6 +266,26 @@
             this.layoutControlItem1.Text = "Наименование";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(73, 13);
             // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 169);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 26);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // sbOK
+            // 
+            this.sbOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.sbOK.ImageOptions.Image = global::fmMain.Properties.Resources.Save;
+            this.sbOK.Location = new System.Drawing.Point(132, 181);
+            this.sbOK.Name = "sbOK";
+            this.sbOK.Size = new System.Drawing.Size(100, 22);
+            this.sbOK.StyleController = this.layoutControl1;
+            this.sbOK.TabIndex = 10;
+            this.sbOK.Text = "Сохранить";
+            this.sbOK.Click += new System.EventHandler(this.sbOK_Click);
+            // 
             // sbCancel
             // 
             this.sbCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -289,18 +310,6 @@
             this.lciCancel.TextSize = new System.Drawing.Size(0, 0);
             this.lciCancel.TextVisible = false;
             // 
-            // sbOK
-            // 
-            this.sbOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.sbOK.ImageOptions.Image = global::fmMain.Properties.Resources.Save;
-            this.sbOK.Location = new System.Drawing.Point(132, 181);
-            this.sbOK.Name = "sbOK";
-            this.sbOK.Size = new System.Drawing.Size(100, 22);
-            this.sbOK.StyleController = this.layoutControl1;
-            this.sbOK.TabIndex = 10;
-            this.sbOK.Text = "Сохранить";
-            this.sbOK.Click += new System.EventHandler(this.sbOK_Click);
-            // 
             // lciOK
             // 
             this.lciOK.Control = this.sbOK;
@@ -313,14 +322,6 @@
             this.lciOK.TextSize = new System.Drawing.Size(0, 0);
             this.lciOK.TextVisible = false;
             // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 169);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(120, 26);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // fmTermEdit
             // 
             this.AcceptButton = this.sbOK;
@@ -329,6 +330,7 @@
             this.CancelButton = this.sbCancel;
             this.ClientSize = new System.Drawing.Size(348, 215);
             this.Controls.Add(this.layoutControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmTermEdit";
             this.Text = "Окно редактирования терма";
             this.Load += new System.EventHandler(this.fmTermEdit_Load);
@@ -346,9 +348,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciOK)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             this.ResumeLayout(false);
 
         }

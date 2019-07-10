@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using fmMain.Classes;
 using DevExpress.XtraCharts;
+using DevExpress.XtraLayout.Utils;
+using System.Threading;
 
 namespace fmMain
 {
@@ -18,6 +20,7 @@ namespace fmMain
             InitializeComponent();
             _conceptList = new List<Concept>();
             _relativeList = new List<Relative>();
+            VisibleDelta();
         }
         //public int Action { get; set; }
 
@@ -266,6 +269,10 @@ namespace fmMain
         private void InitData()
         {
 
+            _conceptList = new List<Concept>();
+            _relativeList = new List<Relative>();
+            Lines = new List<Line>();
+            Tops = new List<Top>();
             var t1 = new Term(0.0, 0.1, 0.2, 0.3, "Быстро");
             var t2 = new Term(0.4, 0.6, 0.8, 1.0, "Медленно");
             var tl1 = new List<Term>();
@@ -390,7 +397,7 @@ namespace fmMain
                         rowId = r.Index;
                 }
 
-                dataGridView1[colId, rowId].Value = rel.Value != 0 ? rel.Value : (double?) null;
+                dataGridView1[colId, rowId].Value = rel.Value != 0 ? rel.Value : (double?)null;
             }
         }
 
@@ -464,8 +471,8 @@ namespace fmMain
                         DrawAllGraph();
                         return;
                     }
-                    
-                    foreach(var l in Lines)
+
+                    foreach (var l in Lines)
                     {
                         if (l.V1.Name == _oldRelative._Concept1.Id.ToString() && l.V2.Name == _oldRelative._Concept2.Id.ToString())
                             l.Weight = _oldRelative.Value;
@@ -502,34 +509,69 @@ namespace fmMain
             {
                 var mas = Dymanic();
 
+                var conDelta = Convert.ToInt32(lueConceptDelta.EditValue);
+                var stepIter = Convert.ToInt32(seStepDelta.EditValue);
+                var delta = Convert.ToDouble(seDeltaConcept.EditValue);
+                chartControl1.Series.Clear();
                 var col = mas.GetLength(0);
                 var row = mas.GetLength(1);
                 dataGridView2.ColumnCount = col;
                 dataGridView2.RowCount = row;
-                for (int j = 0; j < row; j++)
+                for (int i = 0; i < col; i++)
                 {
-                    for (int i = 0; i < col; i++)
+                    dataGridView2.Columns[i].HeaderCell.Value = i.ToString();
+                    for (int j = 0; j < row; j++)
                     {
+                        if (i == 0)
+                        {
+                            dataGridView2.Rows[j].HeaderCell.Value = _conceptList[j].Name;
+                            dataGridView2.RowHeadersWidth = 110;
+                            var seria = new Series(_conceptList[j].Name, ViewType.Line);
+                            seria.View.Color = Tops[j].Color;
+                            seria.Points.Add(new SeriesPoint(i, mas[i, j]));
+                            chartControl1.Series.Add(seria);
+                            seria.ArgumentScaleType = ScaleType.Numerical;
+
+                            ((LineSeriesView)seria.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
+                            ((LineSeriesView)seria.View).LineMarkerOptions.Kind = MarkerKind.Star;
+                            ((LineSeriesView)seria.View).LineStyle.DashStyle = DashStyle.Solid;
+                        }
+                        if (ceDelta.Checked && dataGridView2.Rows[j].HeaderCell.Value.ToString() == _conceptList.FirstOrDefault(g => g.Id == conDelta).Name && stepIter == i)
+                        {
+                            mas[i, j] += delta;
+
+                        }
+
+                        if (mas[i, j] > 1)
+                            mas[i, j] = mas[i, j] * 0.1;
+                        if (mas[i, j] < -1)
+                            mas[i, j] = mas[i, j] * 0.1;
                         dataGridView2[i, j].Value = mas[i, j];
+                        chartControl1.Series[j].Points.Add(new SeriesPoint(i, mas[i, j]));
                     }
+                    //k = 0;
+                    //while(k<1000)
+                    //{
+                    //    k++;
+                    //}
                 }
-                chartControl1.Series.Clear();
+                
 
-                for (int j = 0; j < row; j++)
-                {
-                    var seria = new Series(_conceptList[j].Name, ViewType.Line);
-                    seria.View.Color = Tops[j].Color;
-                    for (int i = 0; i < col; i++)
-                    {
-                        seria.Points.Add(new SeriesPoint(i, mas[i, j]));
-                    }
-                    chartControl1.Series.Add(seria);
-                    seria.ArgumentScaleType = ScaleType.Numerical;
-
-                    ((LineSeriesView)seria.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
-                    ((LineSeriesView)seria.View).LineMarkerOptions.Kind = MarkerKind.Star;
-                    ((LineSeriesView)seria.View).LineStyle.DashStyle = DashStyle.Solid;
-                }
+                //for (int j = 0; j < row; j++)
+                //{
+                //    var seria = new Series(_conceptList[j].Name, ViewType.Line);
+                //    seria.View.Color = Tops[j].Color;
+                //    for (int i = 0; i < col; i++)
+                //    {
+                //        seria.Points.Add(new SeriesPoint(i, mas[i, j]));
+                //    }
+                //    chartControl1.Series.Add(seria);
+                //    seria.ArgumentScaleType = ScaleType.Numerical;
+                    
+                //    ((LineSeriesView)seria.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
+                //    ((LineSeriesView)seria.View).LineMarkerOptions.Kind = MarkerKind.Star;
+                //    ((LineSeriesView)seria.View).LineStyle.DashStyle = DashStyle.Solid;
+                //}
 
 
             }
@@ -542,9 +584,10 @@ namespace fmMain
         {
             var matrixDegree = new double[Iteration, _conceptList.Count];
 
-            for (int i = 0; i < Iteration; i++)
+
+            for (int j = 0; j < _conceptList.Count; j++)
             {
-                for (int j = 0; j < _conceptList.Count; j++)
+                for (int i = 0; i < Iteration; i++)
                 {
                     if (i == 0)
                     {
@@ -579,6 +622,32 @@ namespace fmMain
         private void seIteration_EditValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void lueConceptDelta_EditValueChanged(object sender, EventArgs e)
+        {
+
+
+        }
+        private void VisibleDelta()
+        {
+            if (ceDelta.Checked)
+            {
+                lciConceptDelta.Visibility = LayoutVisibility.Always;
+                lciStepDelta.Visibility = LayoutVisibility.Always;
+                lciDelta.Visibility = LayoutVisibility.Always;
+                lueConceptDelta.Properties.DataSource = _conceptList;
+            }
+            else
+            {
+                lciConceptDelta.Visibility = LayoutVisibility.Never;
+                lciStepDelta.Visibility = LayoutVisibility.Never;
+                lciDelta.Visibility = LayoutVisibility.Never;
+            }
+        }
+        private void ceDelta_CheckedChanged(object sender, EventArgs e)
+        {
+            VisibleDelta();
         }
     }
 }
